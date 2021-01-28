@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>My Library</title>
+</head>
+<body>
+  <header>
+    <div class="header__inner-wrapper">
+      <span class="material-icons library-icon">library_books</span>
+      <h1 class="page-title">My Library</h1>
+    </div>
+  </header>
+  <section id="form-section" class="form-section">
+    <form id="add-new-book-form" class="add-new-book-form" action="#" method="post">
+      <div class="form-element-wrapper">
+        <button id="close-new-book-btn" class="btn alt round close-new-book-btn" type="button">&times;</button>
+      </div>
+      <div class="form-element-wrapper">
+        <label for="new-book-title">Book title:</label>
+        <input type="text" name="new-book-title" id="new-book-title" placeholder="The Big Book of Titles" required>
+      </div>
+      <div class="form-element-wrapper">
+        <label for="new-book-author">Book author:</label>
+        <input type="text" name="new-book-author" id="new-book-author" placeholder="A. Uthor" required>
+      </div>
+      <div class="form-element-wrapper">
+        <label for="new-book-num-of-pages">Book number of pages:</label>
+        <input type="number" name="new-book-num-of-pages" id="new-book-num-of-pages" placeholder="140" required>
+      </div>
+      <div class="form-element-wrapper radio-element">
+        <div class="radio-input-text">Have read book:</div>
+        <label for="new-book-read">Yes</label>
+        <input type="radio" name="new-book-read" id="new-book-read" value="Yes" checked required>
+        <label for="new-book-not-read">No</label>
+        <input type="radio" name="new-book-read" id="new-book-not-read" value="No" required>
+      </div>
+      <div class="form-element-wrapper">
+        <label for="new-book-rating">Rating (Optional):</label>
+        <select name="new-book-rating" id="new-book-rating">
+          <option value="1">1 star</option>
+          <option value="2">2 stars</option>
+          <option value="3">3 stars</option>
+          <option value="4">4 stars</option>
+          <option value="5">5 stars</option>
+        </select>
+      </div>
+      <div class="form-element-wrapper">
+        <label for="new-book-image">Book Image Link:</label>
+        <input type="text" name="new-book-image" id="new-book-image" placeholder="https://www.image-location.com" required>
+      </div>
+      <div class="form-element-wrapper">
+        <label for="new-book-notes">Notes (Optional):</label>
+        <textarea name="new-book-notes" id="new-book-notes" placeholder="Notes"></textarea>
+      </div>
+      <div class="form-element-wrapper block full-width text-align--right">
+        <button id="clear-new-book-btn" class="btn alt clear-new-book-btn" type="button">Clear</button>
+        <button id="save-new-book-btn" class="btn save-new-book-btn" type="submit">Save new book</button>
+      </div>
+    </form>
+  </section>
+  <main>
+    <div id="invisible-btn" class="invisible-btn"></div>
+    <button id="new-book-form-toggle" class="btn round new-book-form-toggle">&plus;</button>
+    <div id="book-list" class="book-list"></div>
+  </main>
+  <script src="/js/javascript.js"></script>
+</body>
+</html>
