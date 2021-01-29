@@ -7,7 +7,7 @@
   rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="css/style.css">
   <title>My Library</title>
 </head>
 <body>
@@ -44,6 +44,7 @@
       <div class="form-element-wrapper">
         <label for="new-book-rating">Rating (Optional):</label>
         <select name="new-book-rating" id="new-book-rating">
+          <option disabled selected value> - select a rating - </option>
           <option value="1">1 star</option>
           <option value="2">2 stars</option>
           <option value="3">3 stars</option>
@@ -52,8 +53,8 @@
         </select>
       </div>
       <div class="form-element-wrapper">
-        <label for="new-book-image">Book Image Link:</label>
-        <input type="text" name="new-book-image" id="new-book-image" placeholder="https://www.image-location.com" required>
+        <label for="new-book-image">Book Image Link (Optional):</label>
+        <input type="text" name="new-book-image" id="new-book-image" placeholder="https://www.image-location.com">
       </div>
       <div class="form-element-wrapper">
         <label for="new-book-notes">Notes (Optional):</label>
@@ -70,6 +71,6 @@
     <button id="new-book-form-toggle" class="btn round new-book-form-toggle">&plus;</button>
     <div id="book-list" class="book-list"></div>
   </main>
-  <script src="/js/javascript.js"></script>
+  <script src="js/javascript.js"></script>
 </body>
 </html>

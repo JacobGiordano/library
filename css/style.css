@@ -183,7 +183,6 @@ header {
   min-width: 100%;
   max-width: 100%;
   min-height: 8rem;
-  max-height: 8rem;
 }
 
 .form-element-wrapper:first-of-type {
@@ -386,6 +385,7 @@ main {
 
 .save-btn, .edit-btn, .delete-btn {
   border-radius: var(--border-radius);
+  width: 20px;
   font-size: 1.5rem;
   /* padding: .25rem; */
   text-align: center;

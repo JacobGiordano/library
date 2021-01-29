@@ -1,10 +1,11 @@
 let myLibrary = [
   {
-    title: "Book 1",
-    author: "Me",
-    numOfPages: 2,
+    title: "Moby Dick",
+    author: "Herman Melville",
+    numOfPages: 752,
     readBook: "Yes",
-    image: "https://images-na.ssl-images-amazon.com/images/I/41VnFKC9srL.jpg"
+    image: "https://images-na.ssl-images-amazon.com/images/I/41VnFKC9srL.jpg",
+    notes: "I have to admit that as much as I've wanted to really get into this book, knowing it's a classic, I can't commit to finishing it. No matter how many times I restart this book, I just lose steam and never seem to get very far. Sorry, Herman. ¯\_(ツ)_/¯"
   },
   {
     title: "Book 2",
@@ -26,13 +27,13 @@ let myLibrary = [
     readBook: "Yes"
   },
   {
-    title: "The Hobbit: There and Back Again (75th Anniversary Edition)",
-    author: "J.R.R. Tolkein",
-    numOfPages: 100,
+    title: "The Hobbit (75th Anniversary Edition)",
+    author: "J.R.R. Tolkien",
+    numOfPages: 320,
     readBook: "Yes",
     image: "https://images-na.ssl-images-amazon.com/images/I/91b0C2YNSrL.jpg",
     rating: 5,
-    notes: "Awesome. Just awesome. Hands-down one of my favorite books of all time. It's insane how well it holds up over time. No matter how many times I read it, or when I get the feeling it's time to revisit this, I find new way to appreciate Tolkein's work and new aspects to love. An exceptional piece of work for the ages. I can't recommend this — or any of the books in the series — enough! A masterpiece!!! 🙌🏽"
+    notes: "As a kid who desperately wished they were an avid reader, but always found themselves bored or disinterested with the books they started, \"The Hobbit\" was a stand-out exception. I remember starting this book for a book report and feeling different about it. I found instead of feeling the way I normally did while reading, I was voraciously consuming each page. To this day \"The Hobbit\" remains one of few books from my childhood I remember fondly and still have a great appreciation for; reserving a special place for it on a small book shelf in my heart."
   }
 ];
 
@@ -59,16 +60,13 @@ const addBookToLibrary = () => {
 
   myLibrary.unshift(newBook);
   console.log("New book added!");
-  // console.table(myLibrary);
   clearNewBookForm();
-  saveBookFormToggle.click();
   listLibraryBooks(myLibrary);
 }
 
 const clearNewBookForm = () => {
   const formChildren = document.querySelectorAll(".form-element-wrapper input, .form-element-wrapper textarea");
   for (input of formChildren) {
-    // console.log(input.type);
     input.type === "text" ? input.value = "" : (input.type === "radio" ? (input.id === "new-book-read" ? input.checked = true : input.checked = false) : (input.nodeName === "TEXTAREA" ? input.value = "" : (input.type === "number" ? input.value = "" : null)));
   }
 }
@@ -270,7 +268,8 @@ closeNewBookBtn.addEventListener("click", closeNewBookForm);
 
 invisibleBtn.addEventListener("click", closeNewBookForm);
 
-addNewBookBtn.addEventListener("click", () => {
+saveNewBookForm.addEventListener("submit", e => {
+  e.preventDefault();
   addBookToLibrary();
 })
 
