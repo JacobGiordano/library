@@ -74,12 +74,22 @@ const clearNewBookForm = () => {
 }
 
 const generateCardComponent = (elementType, classToAdd, elementText) => {
-  const newElement = document.createElement(elementType);
-  newElement.className += classToAdd;
-  if (elementText !== undefined) {
-    const newElementData = document.createTextNode(elementText);
-    newElement.appendChild(newElementData); 
+  let newElement;
+  elementType.indexOf("input") > -1 ? newElement = document.createElement("input") : newElement = document.createElement(elementType);
+  if (elementType.indexOf("text") > -1) {
+    newElement.setAttribute("type", "text");
+    elementText !== undefined ? newElement.value = elementText : null;
+  } else if (elementType.indexOf("number") > -1) {
+    newElement.setAttribute("type", "number");
+    elementText !== undefined ? newElement.value = elementText : null;
+  } else {
+    newElement = document.createElement(elementType);
+    if (elementText !== undefined) {
+      const newElementData = document.createTextNode(elementText);
+      newElement.appendChild(newElementData); 
+    }
   }
+  newElement.className += classToAdd;
   return newElement;
 }
 
@@ -135,18 +145,14 @@ const listLibraryBooks = libraryArray => {
     // card
     let cardEl = generateCardComponent("div", "card");
     cardEl.setAttribute("data-card-id", libraryArray.indexOf(book));
-    // edit & delete btns
-    const editAndDeleteBtnWrapper = generateCardComponent("div", "card-section edit-delete-btn__wrapper");
-    const editdeleteBtn = generateCardComponent("span", "material-icons edit-btn", "edit");
-    editdeleteBtn.setAttribute("tabindex", "0");
-    editdeleteBtn.setAttribute("title", "Edit book");
-    const carddeleteBtn = generateCardComponent("span", "material-icons delete-btn", "delete_forever");
-    carddeleteBtn.setAttribute("tabindex", "0");
-    carddeleteBtn.setAttribute("title", "Delete book");
-    editAndDeleteBtnWrapper.appendChild(editdeleteBtn);
-    editAndDeleteBtnWrapper.appendChild(carddeleteBtn);
+    // delete btn
+    const cardButtons = generateCardComponent("div", "card-section card-btns__wrapper");
+    const cardDeleteBtn = generateCardComponent("span", "material-icons delete-btn", "delete_forever");
+    cardDeleteBtn.setAttribute("tabindex", "0");
+    cardDeleteBtn.setAttribute("title", "Delete book");
+    cardButtons.appendChild(cardDeleteBtn);
     // add edit &delete buttons *BEFORE* both left & right wrappers
-    cardEl.appendChild(editAndDeleteBtnWrapper);
+    cardEl.appendChild(cardButtons);
     let leftWrapper = generateCardComponent("div", "card__inner-wrapper__left");
     // title
     const titleWrapper = generateCardComponent("div", "card-section");    

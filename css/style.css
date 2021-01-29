@@ -379,12 +379,12 @@ main {
   padding: 48% 0 52%;
 }
 
-.edit-delete-btn__wrapper {
+.card-btns__wrapper {
   margin-left: auto;
   grid-column: 2 / 3;
 }
 
-.edit-btn, .delete-btn {
+.save-btn, .edit-btn, .delete-btn {
   border-radius: var(--border-radius);
   font-size: 1.5rem;
   /* padding: .25rem; */
@@ -394,13 +394,11 @@ main {
   transition: all ease-in-out .2s;
 }
 
-.delete-btn {
+.edit-btn, .delete-btn {
   margin-left: .25rem;
 }
 
 .edit-btn:hover, .delete-btn:hover {
-  /* background: var(--dark-blue-green); */
-  /* color: var(--super-light-gray); */
   color: var(--dark-blue-green);
   opacity: 1;
   cursor: pointer;
