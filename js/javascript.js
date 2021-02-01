@@ -122,14 +122,28 @@ const addReadToggleEventListeners = () => {
   }
 }
 
+const addRatingEventListeners = () => {
+  const ratingStars = document.querySelectorAll(".rating-star");
+  for (star of ratingStars) {
+    star.addEventListener("click", e => {
+      const rating = e.target.getAttribute("data-rating");
+      const clickedStarCardId = e.target.closest(".card").getAttribute("data-card-id");
+      myLibrary[clickedStarCardId].rating = rating;
+      listLibraryBooks(myLibrary);
+    });
+  }
+}
+
 const generateRating = ratingNum => {
   let starWrapper = generateCardComponent("div", "rating-star__wrapper");
   for (let i = 0; i < 5; i++) {
     let currentStar;
     if (ratingNum > i ) {
       currentStar = generateCardComponent("span", "material-icons rating-star solid", "star");
+      currentStar.setAttribute("data-rating", i + 1);
     } else {
-      currentStar = generateCardComponent("span", "material-icons rating-star", "star_outline");
+      currentStar = generateCardComponent("span", "material-icons rating-star", "star_border");
+      currentStar.setAttribute("data-rating", i + 1);
     }
     starWrapper.appendChild(currentStar);
   }
@@ -235,6 +249,7 @@ const listLibraryBooks = libraryArray => {
   bookList.appendChild(docFrag);
   addDeleteEventListeners();
   addReadToggleEventListeners();
+  addRatingEventListeners();
 }
 
 const expandNewBookForm = () => {

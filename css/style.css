@@ -97,6 +97,7 @@ header {
 .btn.alt:hover {
   background: var(--dark-blue-green);
   color: var(--white);
+  border-color: var(--light-blue-green);
 }
 
 .btn.round {
@@ -343,8 +344,20 @@ main {
   left: 1rem;
 }
 
+.card .rating-star{
+  cursor: pointer;
+}
+
 .card .rating-star.solid {
   color: var(--golden);
+}
+
+.card .rating-star:hover ~ .rating-star{
+  opacity: 5;
+}
+
+.card .rating-star:hover{
+  transform: scale(1.3);
 }
 
 .card .card-notes__wrapper {
