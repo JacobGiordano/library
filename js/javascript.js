@@ -1,5 +1,14 @@
 let myLibrary = [
   {
+    title: "The Hobbit (75th Anniversary Edition)",
+    author: "J.R.R. Tolkien",
+    numOfPages: 320,
+    readBook: "Yes",
+    image: "https://images-na.ssl-images-amazon.com/images/I/91b0C2YNSrL.jpg",
+    rating: 5,
+    notes: "As a kid who desperately wished they were an avid reader, but always found themselves bored or disinterested with the books they started, \"The Hobbit\" was a stand-out exception. I remember starting this book for a book report and feeling different about it. I found instead of feeling the way I normally did while reading, I was voraciously consuming each page. To this day \"The Hobbit\" remains one of few books from my childhood I remember fondly and still have a great appreciation for; reserving a special place for it on a small book shelf in my heart."
+  },
+  {
     title: "Moby Dick",
     author: "Herman Melville",
     numOfPages: 752,
@@ -25,15 +34,6 @@ let myLibrary = [
     author: "Us",
     numOfPages: 10,
     readBook: "Yes"
-  },
-  {
-    title: "The Hobbit (75th Anniversary Edition)",
-    author: "J.R.R. Tolkien",
-    numOfPages: 320,
-    readBook: "Yes",
-    image: "https://images-na.ssl-images-amazon.com/images/I/91b0C2YNSrL.jpg",
-    rating: 5,
-    notes: "As a kid who desperately wished they were an avid reader, but always found themselves bored or disinterested with the books they started, \"The Hobbit\" was a stand-out exception. I remember starting this book for a book report and feeling different about it. I found instead of feeling the way I normally did while reading, I was voraciously consuming each page. To this day \"The Hobbit\" remains one of few books from my childhood I remember fondly and still have a great appreciation for; reserving a special place for it on a small book shelf in my heart."
   }
 ];
 
@@ -100,26 +100,27 @@ const clearLibraryDisplay = parentElement => {
   }
 }
 
+const evalDeleteCardClick = e => {
+  if (a11yClick(e) === true) {
+    if (confirm('Are you sure you want to delete this book?')) {
+      const clickedBtnCard = e.target.closest(".card");
+      const clickedBtnCardId = clickedBtnCard.getAttribute("data-card-id");
+      myLibrary.splice(clickedBtnCardId, 1);
+      clickedBtnCard.parentNode.removeChild(clickedBtnCard);
+
+      // listLibraryBooks(myLibrary);
+    }
+  }
+}
+
 const addDeleteEventListeners = () => {
   const deleteBookBtns = document.querySelectorAll(".delete-btn");
   for (btn of deleteBookBtns) {
     btn.addEventListener("click", e => {
-      if (a11yClick(e) === true) {
-        if (confirm('Are you sure you want to delete this book?')) {
-        const clickedBtnCardId = e.target.closest(".card").getAttribute("data-card-id");
-        myLibrary.splice(clickedBtnCardId, 1);
-        listLibraryBooks(myLibrary);
-      }
-      }
+      evalDeleteCardClick(e);
     });
     btn.addEventListener("keydown", e => {
-      if (a11yClick(e) === true) {
-        if (confirm('Are you sure you want to delete this book?')) {
-        const clickedBtnCardId = e.target.closest(".card").getAttribute("data-card-id");
-        myLibrary.splice(clickedBtnCardId, 1);
-        listLibraryBooks(myLibrary);
-      }
-      }
+      evalDeleteCardClick(e);
     });
   }
 }
@@ -129,20 +130,68 @@ const addReadToggleEventListeners = () => {
   for (toggle of readBookToggles) {
     toggle.addEventListener("click", e => {
       if (a11yClick(e) === true) {
-      const clickedtoggleCardId = e.target.closest(".card").getAttribute("data-card-id");
-      let currentReadState = myLibrary[clickedtoggleCardId].readBook;
-      currentReadState === "Yes" ? myLibrary[clickedtoggleCardId].readBook = "No" : myLibrary[clickedtoggleCardId].readBook = "Yes";
-      listLibraryBooks(myLibrary);
+        const card = e.target.closest(".card");
+        const clickedtoggleCardId = card.getAttribute("data-card-id");
+        const checkbox = card.querySelector("input[type='checkbox']");
+        const checkboxState = checkbox.checked;
+        checkboxState === true ? checkbox.checked = false : checkbox.checked = true;
+
+        let currentReadState = myLibrary[clickedtoggleCardId].readBook;
+        currentReadState === "Yes" ? myLibrary[clickedtoggleCardId].readBook = "No" : myLibrary[clickedtoggleCardId].readBook = "Yes";
       }
     });
     toggle.addEventListener("keydown", e => {
       if (a11yClick(e) === true) {
-      const clickedtoggleCardId = e.target.closest(".card").getAttribute("data-card-id");
-      let currentReadState = myLibrary[clickedtoggleCardId].readBook;
-      currentReadState === "Yes" ? myLibrary[clickedtoggleCardId].readBook = "No" : myLibrary[clickedtoggleCardId].readBook = "Yes";
-      listLibraryBooks(myLibrary);
+        const card = e.target.closest(".card");
+        const clickedtoggleCardId = card.getAttribute("data-card-id");
+        const checkbox = card.querySelector("input[type='checkbox']");
+        const checkboxState = checkbox.checked;
+        checkboxState === true ? checkbox.checked = false : checkbox.checked = true;
+
+        let currentReadState = myLibrary[clickedtoggleCardId].readBook;
+        currentReadState === "Yes" ? myLibrary[clickedtoggleCardId].readBook = "No" : myLibrary[clickedtoggleCardId].readBook = "Yes";
       }
     });
+  }
+}
+
+const evalRatingStarClick = e => {
+  if (a11yClick(e) === true) {
+    const card = e.target.closest(".card");
+    const clickedStarCardId = card.getAttribute("data-card-id");
+    const rating = e.target.getAttribute("data-rating");
+    const ratingStars = card.querySelectorAll(".material-icons.rating-star");
+
+    for (let i=0; i < ratingStars.length; i++) {
+      let currentStar = ratingStars[i];
+      if (i < rating) {
+        currentStar.textContent = "star";
+        currentStar.classList.add("solid");
+      } else {
+        currentStar.textContent = "star_outline";
+        currentStar.classList.remove("solid");
+      } 
+    }
+
+    myLibrary[clickedStarCardId].rating = rating;
+    // listLibraryBooks(myLibrary);
+  }
+}
+
+const evalClearRatingClick = e => {
+  if (a11yClick(e) === true) {
+    const card = e.target.closest(".card");
+    const clickedStarCardId = card.getAttribute("data-card-id");
+    const ratingStars = card.querySelectorAll(".material-icons.rating-star");
+
+    for (let i=0; i < ratingStars.length; i++) {
+      let currentStar = ratingStars[i];
+      currentStar.textContent = "star_outline";
+      currentStar.classList.remove("solid");
+    }
+
+    delete myLibrary[clickedStarCardId].rating;
+    // listLibraryBooks(myLibrary);
   }
 }
 
@@ -150,20 +199,10 @@ const addRatingEventListeners = () => {
   const ratingStars = document.querySelectorAll(".rating-star");
   for (star of ratingStars) {
     star.addEventListener("click", e => {
-      if (a11yClick(e) === true) {
-        const rating = e.target.getAttribute("data-rating");
-        const clickedStarCardId = e.target.closest(".card").getAttribute("data-card-id");
-        myLibrary[clickedStarCardId].rating = rating;
-        listLibraryBooks(myLibrary);          
-      }
+      evalRatingStarClick(e);
     });
     star.addEventListener("keydown", e => {
-      if (a11yClick(e) === true) {
-        const rating = e.target.getAttribute("data-rating");
-        const clickedStarCardId = e.target.closest(".card").getAttribute("data-card-id");
-        myLibrary[clickedStarCardId].rating = rating;
-        listLibraryBooks(myLibrary);          
-      }
+      evalRatingStarClick(e);
     });
   }
 }
@@ -172,18 +211,10 @@ const addRatingClearEventListeners = () => {
   const clearRatingBtns = document.querySelectorAll(".clear-rating-btn");
   for (btn of clearRatingBtns) {
     btn.addEventListener("click", e => {
-      if (a11yClick(e) === true) {
-        const clickedStarCardId = e.target.closest(".card").getAttribute("data-card-id");
-        delete myLibrary[clickedStarCardId].rating;
-        listLibraryBooks(myLibrary);
-      }
+      evalClearRatingClick(e);
     });
     btn.addEventListener("keydown", e => {
-      if (a11yClick(e) === true) {
-        const clickedStarCardId = e.target.closest(".card").getAttribute("data-card-id");
-        delete myLibrary[clickedStarCardId].rating;
-        listLibraryBooks(myLibrary);
-      }
+      evalClearRatingClick(e);
     });
   }
 }
@@ -256,17 +287,17 @@ const listLibraryBooks = libraryArray => {
     const readStatusWrapper = makeNewEl("div", "card-section", "", "");    
     const readStatusTitle = makeNewEl("label", "card-section-title", "Read book", {"for": "book-read"});
     readStatusWrapper.appendChild(readStatusTitle);
-    const bookReadStatus = makeNewEl("input", "book-read hidden", "", {
+    const bookReadStatus = makeNewEl("input", "book-read toggle__hidden-checkbox", "", {
       "type": "checkbox",
       "name": "book-read"
     });
     book.readBook === "Yes" ? bookReadStatus.checked = true : bookReadStatus.checked = false;
     readStatusWrapper.appendChild(bookReadStatus);
-    const readToggleWrapper = makeNewEl("div", "read-toggle__wrapper", "", {"tabindex": "0"});
-    const readToggleYes = makeNewEl("span", "read-toggle__no", "No", "", "");
-    const readToggleBody = makeNewEl("div", "read-toggle__body", "", "");
-    const readToggleDot = makeNewEl("div", "read-toggle__dot", "", "");
-    const readToggleNo = makeNewEl("span", "read-toggle__yes", "Yes", "");
+    const readToggleWrapper = makeNewEl("div", "toggle-wrapper read-toggle__wrapper", "", {"tabindex": "0"});
+    const readToggleYes = makeNewEl("span", "toggle-option__left read-toggle__no", "No", "", "");
+    const readToggleBody = makeNewEl("div", "toggle-body read-toggle__body", "", "");
+    const readToggleDot = makeNewEl("div", "toggle-dot read-toggle__dot", "", "");
+    const readToggleNo = makeNewEl("span", "toggle-option__right read-toggle__yes", "Yes", "");
     readToggleWrapper.appendChild(readToggleYes);
     readToggleBody.appendChild(readToggleDot);
     readToggleWrapper.appendChild(readToggleBody);
@@ -275,12 +306,21 @@ const listLibraryBooks = libraryArray => {
     leftWrapper.appendChild(readStatusWrapper);
     // rating
     const ratingWrapper = makeNewEl("div", "card-section", "", "");    
-    const ratingTitle = makeNewEl("span", "card-section-title", "rating", "");
+    const ratingTitle = makeNewEl("span", "card-section-title", "Rating", "");
     ratingWrapper.appendChild(ratingTitle);
     const bookRating = generateRating(book.rating);
     ratingWrapper.appendChild(bookRating);
     leftWrapper.appendChild(ratingWrapper);
-    // add it all to the left inner wrapper
+    // notes
+    if (book.notes) {
+      const notesWrapper = makeNewEl("div", "card-section card-notes__wrapper", "", "");    
+      const notesTitle = makeNewEl("span", "card-section-title", "Notes", "");
+      notesWrapper.appendChild(notesTitle);
+      const bookNotes = makeNewEl("span", "book-notes", book.notes, "");
+      notesWrapper.appendChild(bookNotes);
+      leftWrapper.appendChild(notesWrapper);
+    }
+    // add the left inner wrapper to the card
     cardEl.appendChild(leftWrapper);
     // add the image wrapper & img element
     let rightWrapper = makeNewEl("div", "card__inner-wrapper__right", "", "");
@@ -297,16 +337,6 @@ const listLibraryBooks = libraryArray => {
     rightWrapper.appendChild(cardImageWrapper);
     // add the right wrapper to the card element
     cardEl.appendChild(rightWrapper);
-    // notes
-    // these go beneath the left and right wrappers so it's full-width beneath them
-    if (book.notes) {
-      const notesWrapper = makeNewEl("div", "card-section card-notes__wrapper", "", "");    
-      const notesTitle = makeNewEl("span", "card-section-title", "Notes", "");
-      notesWrapper.appendChild(notesTitle);
-      const bookNotes = makeNewEl("span", "book-notes", book.notes, "");
-      notesWrapper.appendChild(bookNotes);
-      cardEl.appendChild(notesWrapper);
-    }
     // add it all to the document fragment
     docFrag.appendChild(cardEl);
   }
@@ -357,6 +387,7 @@ const addNewBookBtn = document.getElementById("save-new-book-btn");
 const clearNewBookBtn = document.getElementById("clear-new-book-btn");
 const closeNewBookBtn = document.getElementById("close-new-book-btn");
 const invisibleBtn = document.getElementById("invisible-btn");
+const storageToggleBtn = document.getElementById("storage-toggle__wrapper");
 
 listLibraryBooks(myLibrary);
 
@@ -378,12 +409,6 @@ closeNewBookBtn.addEventListener("click", e => {
   }
 });
 
-invisibleBtn.addEventListener("keydown", e => {
-  if (a11yClick(e) === true) {
-    closeNewBookForm();
-  }
-});
-
 closeNewBookBtn.addEventListener("click", e => {
   if (a11yClick(e) === true) {
     closeNewBookForm();
@@ -408,7 +433,7 @@ invisibleBtn.addEventListener("click", e => {
   }
 });
 
-invisibleBtn.addEventListener("click", e => {
+invisibleBtn.addEventListener("keydown", e => {
   if (a11yClick(e) === true) {
     closeNewBookForm();
   }

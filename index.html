@@ -13,8 +13,22 @@
 <body>
   <header>
     <div class="header__inner-wrapper">
-      <span class="material-icons library-icon">library_books</span>
-      <h1 class="page-title">My Library</h1>
+      <div class="left-wrapper">
+        <span class="material-icons library-icon">library_books</span>
+        <h1 class="page-title">My Library</h1>
+      </div>
+      <div class="right-wrapper">
+
+        <label class="storage-toggle__title" for="storage-location-title">Storage location:</label>
+        <input type="checkbox" name="storage-location" id="storage-location-toggle" class="toggle__hidden-checkbox">
+        <div id="storage-toggle__wrapper" class="toggle-wrapper alt storage-toggle__wrapper" tabindex="0">
+          <span class="toggle-option__left storage-toggle__cloud">Cloud</span>
+          <div class="toggle-body storage-toggle__body">
+            <div class="toggle-dot storage-toggle__dot"></div>
+          </div>
+          <span class="toggle-option__right storage-toggle__cloud">Local</span>
+        </div>
+      </div>
     </div>
   </header>
   <section id="form-section" class="form-section">
@@ -36,10 +50,10 @@
       </div>
       <div class="form-element-wrapper radio-element">
         <div class="radio-input-text">Have read book:</div>
-        <label for="new-book-read">Yes</label>
-        <input type="radio" name="new-book-read" id="new-book-read" value="Yes" checked required>
         <label for="new-book-not-read">No</label>
         <input type="radio" name="new-book-read" id="new-book-not-read" value="No" required>
+        <label for="new-book-read">Yes</label>
+        <input type="radio" name="new-book-read" id="new-book-read" value="Yes" checked required>
       </div>
       <div class="form-element-wrapper">
         <label for="new-book-rating">Rating (Optional):</label>
