@@ -85,6 +85,9 @@ header {
   .header__inner-wrapper .right-wrapper {
     padding-top: .5rem
   }
+}
+
+@media screen and (min-width: 799px) {
   .header__inner-wrapper .right-wrapper .storage-toggle__title {
     display: inline-block;
   }
@@ -96,6 +99,12 @@ header {
 
 .toggle-wrapper.storage-toggle__wrapper {
   vertical-align: middle;
+}
+
+.storage-toggle__icon {
+  height: 1rem;
+  vertical-align: middle;
+  line-height: .5;
 }
 
 .library-icon {

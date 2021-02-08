@@ -155,6 +155,32 @@ const addReadToggleEventListeners = () => {
   }
 }
 
+const setStorageLocation = e => {
+  if (a11yClick(e) === true) {
+    const checkbox = document.getElementById("storage-location-checkbox");
+    const checkboxState = checkbox.checked;
+    checkboxState === true ? checkbox.checked = false : checkbox.checked = true;
+    checkboxState === true ? localStorage.setItem("storageLocation", "local") : localStorage.setItem("storageLocation", "cloud");
+    console.log("Storage location is: " + localStorage.getItem("storageLocation"));
+  }
+}
+
+const checkStorageLocation = () => {
+  const checkbox = document.getElementById("storage-location-checkbox");
+  let storageLocation = localStorage.getItem("storageLocation");
+  if (storageLocation === "cloud" ) {
+    checkbox.checked = true;
+    console.log("storageLocation is cloud");
+  } else if (storageLocation === "local") {
+    checkbox.checked = false;
+    console.log("storageLocation is local");
+  } else {
+    console.log("storageLocation was null");
+    checkbox.checked = false;
+    localStorage.setItem("storageLocation", "local");
+  }
+}
+
 const evalRatingStarClick = e => {
   if (a11yClick(e) === true) {
     const card = e.target.closest(".card");
@@ -387,9 +413,10 @@ const addNewBookBtn = document.getElementById("save-new-book-btn");
 const clearNewBookBtn = document.getElementById("clear-new-book-btn");
 const closeNewBookBtn = document.getElementById("close-new-book-btn");
 const invisibleBtn = document.getElementById("invisible-btn");
-const storageToggleBtn = document.getElementById("storage-toggle__wrapper");
+const storageToggle = document.getElementById("storage-toggle__wrapper");
 
 listLibraryBooks(myLibrary);
+checkStorageLocation();
 
 saveBookFormToggle.addEventListener("click", e => {
   if (a11yClick(e) === true) {
@@ -400,6 +427,18 @@ saveBookFormToggle.addEventListener("click", e => {
 saveBookFormToggle.addEventListener("keydown", e => {
   if (a11yClick(e) === true) {
     expandNewBookForm();
+  }
+});
+
+storageToggle.addEventListener("click", e => {
+  if (a11yClick(e) === true) {
+    setStorageLocation(e);
+  }
+});
+
+storageToggle.addEventListener("keydown", e => {
+  if (a11yClick(e) === true) {
+    setStorageLocation(e);
   }
 });
 

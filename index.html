@@ -18,15 +18,16 @@
         <h1 class="page-title">My Library</h1>
       </div>
       <div class="right-wrapper">
-
-        <label class="storage-toggle__title" for="storage-location-title">Storage location:</label>
-        <input type="checkbox" name="storage-location" id="storage-location-toggle" class="toggle__hidden-checkbox">
+        <label class="storage-toggle__title" for="storage-location-checkbox">Storage location:</label>
+        <input type="checkbox" name="storage-location" id="storage-location-checkbox" class="toggle__hidden-checkbox">
         <div id="storage-toggle__wrapper" class="toggle-wrapper alt storage-toggle__wrapper" tabindex="0">
-          <span class="toggle-option__left storage-toggle__cloud">Cloud</span>
+          <span class="toggle-option__right storage-toggle__cloud">Local</span>
+          <span class="material-icons storage-toggle__icon storage-toggle__computer-icon">computer</span> 
           <div class="toggle-body storage-toggle__body">
             <div class="toggle-dot storage-toggle__dot"></div>
           </div>
-          <span class="toggle-option__right storage-toggle__cloud">Local</span>
+          <span class="toggle-option__left storage-toggle__cloud">Cloud</span>
+          <span class="material-icons storage-toggle__icon storage-toggle__cloud-icon">cloud</span>
         </div>
       </div>
     </div>
