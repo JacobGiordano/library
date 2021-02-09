@@ -1,41 +1,50 @@
-let myLibrary = [
-  {
-    title: "The Hobbit (75th Anniversary Edition)",
-    author: "J.R.R. Tolkien",
-    numOfPages: 320,
-    readBook: "Yes",
-    image: "https://images-na.ssl-images-amazon.com/images/I/91b0C2YNSrL.jpg",
-    rating: 5,
-    notes: "As a kid who desperately wished they were an avid reader, but always found themselves bored or disinterested with the books they started, \"The Hobbit\" was a stand-out exception. I remember starting this book for a book report and feeling different about it. I found instead of feeling the way I normally did while reading, I was voraciously consuming each page. To this day \"The Hobbit\" remains one of few books from my childhood I remember fondly and still have a great appreciation for; reserving a special place for it on a small book shelf in my heart."
-  },
-  {
-    title: "Moby Dick",
-    author: "Herman Melville",
-    numOfPages: 752,
-    readBook: "Yes",
-    image: "https://images-na.ssl-images-amazon.com/images/I/41VnFKC9srL.jpg",
-    notes: "I have to admit that as much as I've wanted to really get into this book, knowing it's a classic, I can't commit to finishing it. No matter how many times I restart this book, I just lose steam and never seem to get very far. Sorry, Herman. ¯\_(ツ)_/¯"
-  },
-  {
-    title: "Book 2",
-    author: "You",
-    numOfPages: 4,
-    readBook: "No",
-    rating: 5
-  },
-  {
-    title: "Book 3",
-    author: "Them",
-    numOfPages: 24,
-    readBook: "No"
-  },
-  {
-    title: "Book 4",
-    author: "Us",
-    numOfPages: 10,
-    readBook: "Yes"
-  }
-];
+// let myLibrary = [
+//   {
+//     title: "The Hobbit (75th Anniversary Edition)",
+//     author: "J.R.R. Tolkien",
+//     numOfPages: 320,
+//     readBook: "Yes",
+//     image: "https://images-na.ssl-images-amazon.com/images/I/91b0C2YNSrL.jpg",
+//     rating: 5,
+//     notes: "As a kid who desperately wished they were an avid reader, but always found themselves bored or disinterested with the books they started, \"The Hobbit\" was a stand-out exception. I remember starting this book for a book report and feeling different about it. I found instead of feeling the way I normally did while reading, I was voraciously consuming each page. To this day \"The Hobbit\" remains one of few books from my childhood I remember fondly and still have a great appreciation for; reserving a special place for it on a small book shelf in my heart."
+//   },
+//   {
+//     title: "Moby Dick",
+//     author: "Herman Melville",
+//     numOfPages: 752,
+//     readBook: "Yes",
+//     image: "https://images-na.ssl-images-amazon.com/images/I/41VnFKC9srL.jpg",
+//     notes: "I have to admit that as much as I've wanted to really get into this book, knowing it's a classic, I can't commit to finishing it. No matter how many times I restart this book, I just lose steam and never seem to get very far. Sorry, Herman. ¯\_(ツ)_/¯"
+//   },
+//   {
+//     title: "Book 2",
+//     author: "You",
+//     numOfPages: 4,
+//     readBook: "No",
+//     rating: 5
+//   },
+//   {
+//     title: "Book 3",
+//     author: "Them",
+//     numOfPages: 24,
+//     readBook: "No"
+//   },
+//   {
+//     title: "Book 4",
+//     author: "Us",
+//     numOfPages: 10,
+//     readBook: "Yes"
+//   }
+// ];
+
+let myLibrary = [];
+
+let sampleData = {
+  title: "Sample Book",
+  author: "Someone",
+  numOfPages: 10,
+  readBook: "No"
+}
 
 function Book (title, author, numOfPages, readBook) {
   this.title = title,
@@ -61,7 +70,8 @@ const addBookToLibrary = () => {
   myLibrary.unshift(newBook);
   console.log("New book added!");
   clearNewBookForm();
-  listLibraryBooks(myLibrary);
+  listLibraryBooks();
+  saveLibraryData()
 }
 
 const clearNewBookForm = () => {
@@ -109,6 +119,7 @@ const evalDeleteCardClick = e => {
       clickedBtnCard.parentNode.removeChild(clickedBtnCard);
 
       // listLibraryBooks(myLibrary);
+      saveLibraryData();
     }
   }
 }
@@ -138,6 +149,7 @@ const addReadToggleEventListeners = () => {
 
         let currentReadState = myLibrary[clickedtoggleCardId].readBook;
         currentReadState === "Yes" ? myLibrary[clickedtoggleCardId].readBook = "No" : myLibrary[clickedtoggleCardId].readBook = "Yes";
+        saveLibraryData();
       }
     });
     toggle.addEventListener("keydown", e => {
@@ -150,34 +162,9 @@ const addReadToggleEventListeners = () => {
 
         let currentReadState = myLibrary[clickedtoggleCardId].readBook;
         currentReadState === "Yes" ? myLibrary[clickedtoggleCardId].readBook = "No" : myLibrary[clickedtoggleCardId].readBook = "Yes";
+        loadStoredData();
       }
     });
-  }
-}
-
-const setStorageLocation = e => {
-  if (a11yClick(e) === true) {
-    const checkbox = document.getElementById("storage-location-checkbox");
-    const checkboxState = checkbox.checked;
-    checkboxState === true ? checkbox.checked = false : checkbox.checked = true;
-    checkboxState === true ? localStorage.setItem("storageLocation", "local") : localStorage.setItem("storageLocation", "cloud");
-    console.log("Storage location is: " + localStorage.getItem("storageLocation"));
-  }
-}
-
-const checkStorageLocation = () => {
-  const checkbox = document.getElementById("storage-location-checkbox");
-  let storageLocation = localStorage.getItem("storageLocation");
-  if (storageLocation === "cloud" ) {
-    checkbox.checked = true;
-    console.log("storageLocation is cloud");
-  } else if (storageLocation === "local") {
-    checkbox.checked = false;
-    console.log("storageLocation is local");
-  } else {
-    console.log("storageLocation was null");
-    checkbox.checked = false;
-    localStorage.setItem("storageLocation", "local");
   }
 }
 
@@ -201,6 +188,7 @@ const evalRatingStarClick = e => {
 
     myLibrary[clickedStarCardId].rating = rating;
     // listLibraryBooks(myLibrary);
+    saveLibraryData();
   }
 }
 
@@ -218,6 +206,7 @@ const evalClearRatingClick = e => {
 
     delete myLibrary[clickedStarCardId].rating;
     // listLibraryBooks(myLibrary);
+    saveLibraryData();
   }
 }
 
@@ -272,12 +261,12 @@ const generateRating = ratingNum => {
   return starWrapper;
 }
 
-const listLibraryBooks = libraryArray => {
+const listLibraryBooks = () => {
   clearLibraryDisplay(bookList);
   const docFrag = new DocumentFragment;
-  for (book of libraryArray) {
+  for (book of myLibrary) {
     // card
-    let cardEl = makeNewEl("div", "card", "", {"data-card-id": libraryArray.indexOf(book)});
+    let cardEl = makeNewEl("div", "card", "", {"data-card-id": myLibrary.indexOf(book)});
     // delete btn
     const cardButtons = makeNewEl("div", "card-section card-btns__wrapper", "", "");
     const cardDeleteBtn = makeNewEl("span", "material-icons delete-btn", "delete_forever", {
@@ -371,7 +360,58 @@ const listLibraryBooks = libraryArray => {
   addReadToggleEventListeners();
   addRatingEventListeners();
   addRatingClearEventListeners();
-  
+}
+
+
+const setStorageLocation = e => {
+  if (a11yClick(e) === true) {
+    const checkbox = document.getElementById("storage-location-checkbox");
+    const checkboxState = checkbox.checked;
+    checkboxState === true ? checkbox.checked = false : checkbox.checked = true;
+    checkboxState === true ? localStorage.setItem("storage-location", "local") : localStorage.setItem("storage-location", "cloud");
+    console.log("Storage location is: " + localStorage.getItem("storage-location"));
+  }
+}
+
+const getStorageLocation = () => {
+  const checkbox = document.getElementById("storage-location-checkbox");
+  let storageLocation = localStorage.getItem("storage-location");
+  if (storageLocation === "cloud" ) {
+    checkbox.checked = true;
+    console.log("storageLocation is cloud");
+  } else if (storageLocation === "local") {
+    checkbox.checked = false;
+    console.log("storageLocation is local");
+  } else {
+    console.log("storageLocation was null");
+    checkbox.checked = false;
+    localStorage.setItem("storage-location", "local");
+  }
+  return storageLocation;
+}
+
+const saveLocalStorageData = () => {
+  localStorage.setItem("library-data", JSON.stringify(myLibrary));
+  console.log(JSON.parse(localStorage.getItem("library-data")));
+}
+
+const saveCloudData = () => {
+  alert("Save cloud data");
+}
+
+const saveLibraryData = () => {
+  const saveLocation = getStorageLocation();
+  saveLocation === "local" ? saveLocalStorageData() : saveCloudData();
+}
+
+const loadStoredData = () => {
+  const storageLocation = getStorageLocation();
+  if (storageLocation === "local") {
+    myLibrary = JSON.parse(localStorage.getItem("library-data") || "[]");
+    !myLibrary.length ? myLibrary.push(sampleData) : null;
+    saveLocalStorageData(myLibrary);
+  }
+  listLibraryBooks();
 }
 
 const expandNewBookForm = () => {
@@ -414,9 +454,6 @@ const clearNewBookBtn = document.getElementById("clear-new-book-btn");
 const closeNewBookBtn = document.getElementById("close-new-book-btn");
 const invisibleBtn = document.getElementById("invisible-btn");
 const storageToggle = document.getElementById("storage-toggle__wrapper");
-
-listLibraryBooks(myLibrary);
-checkStorageLocation();
 
 saveBookFormToggle.addEventListener("click", e => {
   if (a11yClick(e) === true) {
@@ -506,3 +543,8 @@ clearNewBookBtn.addEventListener("click", e => {
     clearNewBookForm();
   }
 });
+
+
+// getStorageLocation();
+// listLibraryBooks(myLibrary);
+loadStoredData();
