@@ -43,7 +43,8 @@ let sampleData = {
   title: "Sample Book",
   author: "Someone",
   numOfPages: 10,
-  readBook: "No"
+  readBook: "No",
+  notes: "To get started, add a book of your own by clicking on the \"+\" sign in the lower-right."
 }
 
 function Book (title, author, numOfPages, readBook) {
