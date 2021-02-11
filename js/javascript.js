@@ -1,5 +1,12 @@
 // let myLibrary = [
 //   {
+//     title: "The Adventures of Sherlock Holmes",
+//     author: "Sir Arthur Conan Doyle",
+//     numOfPages: 320,
+//     readBook: "No",
+//     image: "https://almabooks.com/wp-content/uploads/2016/10/adventures-of-Sherlock-Holmes.jpg"
+//   },
+//   {
 //     title: "The Hobbit (75th Anniversary Edition)",
 //     author: "J.R.R. Tolkien",
 //     numOfPages: 320,
@@ -361,6 +368,7 @@ const listLibraryBooks = libraryData => {
   addReadToggleEventListeners();
   addRatingEventListeners();
   addRatingClearEventListeners();
+  countTotalBooks();
 }
 
 const saveLocalStorageData = () => {
@@ -386,7 +394,6 @@ const expandNewBookForm = () => {
     for (element of formElements) {
       element.setAttribute("tabindex", "0");
     }
-    console.log(formElements);
     saveNewBookForm.classList.add("expanded");
     invisibleBtn.classList.add("block");
     document.getElementById("new-book-title").focus();
@@ -403,6 +410,15 @@ const closeNewBookForm = () => {
     invisibleBtn.classList.remove("block");
     searchInput.focus();
   }
+}
+
+const countTotalBooks = () => {
+  const totalBooks =  myLibrary.length + " total books";
+  totalBooksCount.textContent = totalBooks;
+}
+
+const displaySearchResults = results => {
+    searchResultsCount.textContent = `${results.length} ${results.length > 1 ? "result" : "results"} found in `;
 }
 
 const a11yClick = e => {
@@ -433,6 +449,8 @@ const invisibleBtn = document.getElementById("invisible-btn");
 const searchForm = document.getElementById("search-form");
 const searchInput = document.getElementById("search-input");
 const clearSearchBtn = document.getElementById("search-clear-btn");
+const totalBooksCount = document.getElementById("total-books");
+const searchResultsCount = document.getElementById("search-results");
 
 searchForm.addEventListener("submit", e => {
   e.preventDefault();
@@ -445,6 +463,10 @@ searchInput.addEventListener("input", () => {
       return book;
     }
   }, []);
+  displaySearchResults(results);
+  if (searchTerms === "" || searchTerms === null) {
+    searchResultsCount.textContent = "";
+  }
   if (results.length > 0) {
     listLibraryBooks(results);
   }
