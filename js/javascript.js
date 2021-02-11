@@ -413,12 +413,11 @@ const closeNewBookForm = () => {
 }
 
 const countTotalBooks = () => {
-  const totalBooks =  myLibrary.length + " total books";
-  totalBooksCount.textContent = totalBooks;
+  totalBooksCount.textContent = `${myLibrary.length} ${myLibrary.length > 1 ? "books" : "book"}`;
 }
 
 const displaySearchResults = results => {
-    searchResultsCount.textContent = `${results.length} ${results.length > 1 ? "result" : "results"} found in `;
+    searchResultsCount.textContent = `${results.length} ${results.length === 1 ? "result" : "results"} found in `;
 }
 
 const a11yClick = e => {
