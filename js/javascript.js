@@ -163,7 +163,7 @@ const addReadToggleEventListeners = () => {
 
         let currentReadState = myLibrary[clickedtoggleCardId].readBook;
         currentReadState === "Yes" ? myLibrary[clickedtoggleCardId].readBook = "No" : myLibrary[clickedtoggleCardId].readBook = "Yes";
-        loadStoredData();
+        saveLibraryData();
       }
     });
   }
@@ -382,15 +382,26 @@ const loadStoredData = () => {
 
 const expandNewBookForm = () => {
   if (!saveNewBookForm.classList.contains("expanded")) {
+    const formElements = saveNewBookForm.querySelectorAll("input, select, textarea, button");
+    for (element of formElements) {
+      element.setAttribute("tabindex", "0");
+    }
+    console.log(formElements);
     saveNewBookForm.classList.add("expanded");
     invisibleBtn.classList.add("block");
+    document.getElementById("new-book-title").focus();
   }
 }
 
 const closeNewBookForm = () => {
   if (saveNewBookForm.classList.contains("expanded")) {
+    const formElements = saveNewBookForm.querySelectorAll("input, select, textarea, button");
+    for (element of formElements) {
+      element.setAttribute("tabindex", "-1");
+    }
     saveNewBookForm.classList.remove("expanded");
     invisibleBtn.classList.remove("block");
+    searchInput.focus();
   }
 }
 
@@ -435,7 +446,7 @@ searchInput.addEventListener("input", () => {
     }
   }, []);
   if (results.length > 0) {
-    listLibraryBooks(results)
+    listLibraryBooks(results);
   }
 });
 
@@ -465,19 +476,7 @@ closeNewBookBtn.addEventListener("click", e => {
   }
 });
 
-closeNewBookBtn.addEventListener("click", e => {
-  if (a11yClick(e) === true) {
-    closeNewBookForm();
-  }
-});
-
-saveBookFormToggle.addEventListener("keydown", e => {
-  if (a11yClick(e) === true) {
-    expandNewBookForm();
-  }
-});
-
-closeNewBookBtn.addEventListener("click", e => {
+closeNewBookBtn.addEventListener("keydown", e => {
   if (a11yClick(e) === true) {
     closeNewBookForm();
   }
@@ -495,24 +494,6 @@ invisibleBtn.addEventListener("keydown", e => {
   }
 });
 
-saveBookFormToggle.addEventListener("click", e => {
-  if (a11yClick(e) === true) {
-    expandNewBookForm();
-  }
-});
-
-closeNewBookBtn.addEventListener("click", e => {
-  if (a11yClick(e) === true) {
-    closeNewBookForm();
-  }
-});
-
-invisibleBtn.addEventListener("click", e => {
-  if (a11yClick(e) === true) {
-    closeNewBookForm();
-  }
-});
-
 saveNewBookForm.addEventListener("submit", e => {
   e.preventDefault();
   addBookToLibrary();
@@ -524,6 +505,4 @@ clearNewBookBtn.addEventListener("click", e => {
   }
 });
 
-
-// listLibraryBooks(myLibrary);
 loadStoredData();

@@ -28,30 +28,30 @@
   <section id="form-section" class="form-section">
     <form id="add-new-book-form" class="add-new-book-form" action="#" method="post">
       <div class="form-element-wrapper">
-        <button id="close-new-book-btn" class="btn alt round close-new-book-btn" type="button">&times;</button>
+        <button id="close-new-book-btn" class="btn alt round close-new-book-btn" type="button" tabindex="-1">&times;</button>
       </div>
       <div class="form-element-wrapper">
         <label for="new-book-title">Book title:</label>
-        <input type="text" name="new-book-title" id="new-book-title" placeholder="The Big Book of Titles" required>
+        <input type="text" name="new-book-title" id="new-book-title" placeholder="The Big Book of Titles" tabindex="-1" required>
       </div>
       <div class="form-element-wrapper">
         <label for="new-book-author">Book author:</label>
-        <input type="text" name="new-book-author" id="new-book-author" placeholder="A. Uthor" required>
+        <input type="text" name="new-book-author" id="new-book-author" placeholder="A. Uthor" tabindex="-1" required>
       </div>
       <div class="form-element-wrapper">
         <label for="new-book-num-of-pages">Book number of pages:</label>
-        <input type="number" name="new-book-num-of-pages" id="new-book-num-of-pages" placeholder="140" required>
+        <input type="number" name="new-book-num-of-pages" id="new-book-num-of-pages" placeholder="140" tabindex="-1" required>
       </div>
       <div class="form-element-wrapper radio-element">
         <div class="radio-input-text">Have read book:</div>
         <label for="new-book-not-read">No</label>
-        <input type="radio" name="new-book-read" id="new-book-not-read" value="No" required>
+        <input type="radio" tabindex="-1" name="new-book-read" id="new-book-not-read" value="No" required>
         <label for="new-book-read">Yes</label>
-        <input type="radio" name="new-book-read" id="new-book-read" value="Yes" checked required>
+        <input type="radio" tabindex="-1" name="new-book-read" id="new-book-read" value="Yes" checked required>
       </div>
       <div class="form-element-wrapper">
         <label for="new-book-rating">Rating (Optional):</label>
-        <select name="new-book-rating" id="new-book-rating">
+        <select name="new-book-rating" id="new-book-rating" tabindex="-1">
           <option selected value> - select a rating - </option>
           <option value="1">1 star</option>
           <option value="2">2 stars</option>
@@ -62,15 +62,15 @@
       </div>
       <div class="form-element-wrapper">
         <label for="new-book-image">Book Image Link (Optional):</label>
-        <input type="text" name="new-book-image" id="new-book-image" placeholder="https://www.image-location.com">
+        <input type="text" name="new-book-image" id="new-book-image" placeholder="https://www.image-location.com" tabindex="-1">
       </div>
       <div class="form-element-wrapper">
         <label for="new-book-notes">Notes (Optional):</label>
-        <textarea name="new-book-notes" id="new-book-notes" placeholder="Notes"></textarea>
+        <textarea name="new-book-notes" id="new-book-notes" placeholder="Notes" tabindex="-1"></textarea>
       </div>
       <div class="form-element-wrapper block full-width text-align--right">
-        <button id="clear-new-book-btn" class="btn alt clear-new-book-btn" type="button">Clear</button>
-        <button id="save-new-book-btn" class="btn save-new-book-btn" type="submit">Save new book</button>
+        <button id="clear-new-book-btn" class="btn alt clear-new-book-btn" type="button" tabindex="-1">Clear</button>
+        <button id="save-new-book-btn" class="btn save-new-book-btn" type="submit" tabindex="-1">Save new book</button>
       </div>
     </form>
   </section>
