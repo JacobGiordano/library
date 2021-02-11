@@ -363,55 +363,20 @@ const listLibraryBooks = () => {
   addRatingClearEventListeners();
 }
 
-
-const setStorageLocation = e => {
-  if (a11yClick(e) === true) {
-    const checkbox = document.getElementById("storage-location-checkbox");
-    const checkboxState = checkbox.checked;
-    checkboxState === true ? checkbox.checked = false : checkbox.checked = true;
-    checkboxState === true ? localStorage.setItem("storage-location", "local") : localStorage.setItem("storage-location", "cloud");
-    console.log("Storage location is: " + localStorage.getItem("storage-location"));
-  }
-}
-
-const getStorageLocation = () => {
-  const checkbox = document.getElementById("storage-location-checkbox");
-  let storageLocation = localStorage.getItem("storage-location");
-  if (storageLocation === "cloud" ) {
-    checkbox.checked = true;
-    console.log("storageLocation is cloud");
-  } else if (storageLocation === "local") {
-    checkbox.checked = false;
-    console.log("storageLocation is local");
-  } else {
-    console.log("storageLocation was null");
-    checkbox.checked = false;
-    localStorage.setItem("storage-location", "local");
-  }
-  return storageLocation;
-}
-
 const saveLocalStorageData = () => {
   localStorage.setItem("library-data", JSON.stringify(myLibrary));
   console.log(JSON.parse(localStorage.getItem("library-data")));
 }
 
-const saveCloudData = () => {
-  alert("Save cloud data");
-}
-
 const saveLibraryData = () => {
-  const saveLocation = getStorageLocation();
-  saveLocation === "local" ? saveLocalStorageData() : saveCloudData();
+  saveLocalStorageData();
 }
 
 const loadStoredData = () => {
-  const storageLocation = getStorageLocation();
-  if (storageLocation === "local") {
-    myLibrary = JSON.parse(localStorage.getItem("library-data") || "[]");
-    !myLibrary.length ? myLibrary.push(sampleData) : null;
-    saveLocalStorageData(myLibrary);
-  }
+  myLibrary = JSON.parse(localStorage.getItem("library-data") || "[]");
+  !myLibrary.length ? myLibrary.push(sampleData) : null;
+  saveLocalStorageData(myLibrary);
+
   listLibraryBooks();
 }
 
@@ -468,17 +433,6 @@ saveBookFormToggle.addEventListener("keydown", e => {
   }
 });
 
-storageToggle.addEventListener("click", e => {
-  if (a11yClick(e) === true) {
-    setStorageLocation(e);
-  }
-});
-
-storageToggle.addEventListener("keydown", e => {
-  if (a11yClick(e) === true) {
-    setStorageLocation(e);
-  }
-});
 
 closeNewBookBtn.addEventListener("click", e => {
   if (a11yClick(e) === true) {
@@ -546,6 +500,5 @@ clearNewBookBtn.addEventListener("click", e => {
 });
 
 
-// getStorageLocation();
 // listLibraryBooks(myLibrary);
 loadStoredData();

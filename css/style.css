@@ -66,45 +66,8 @@ header {
   }
 }
 
-.header__inner-wrapper .left-wrapper, .header__inner-wrapper .right-wrapper {
+.header__inner-wrapper .left-wrapper {
   display: inline-block;
-}
-
-.header__inner-wrapper .right-wrapper {
-  margin-left: auto;
-  padding-top: .2rem;
-}
-
-.header__inner-wrapper .right-wrapper .storage-toggle__title {
-  display: none;
-  color: var(--white);
-  margin-right: .5rem;
-}
-
-@media screen and (min-width: 680px) {
-  .header__inner-wrapper .right-wrapper {
-    padding-top: .5rem
-  }
-}
-
-@media screen and (min-width: 799px) {
-  .header__inner-wrapper .right-wrapper .storage-toggle__title {
-    display: inline-block;
-  }
-}
-
-.storage-toggle__title, .toggle-wrapper.storage-toggle__wrapper  {
-  display: inline-block;
-}
-
-.toggle-wrapper.storage-toggle__wrapper {
-  vertical-align: middle;
-}
-
-.storage-toggle__icon {
-  height: 1rem;
-  vertical-align: middle;
-  line-height: .5;
 }
 
 .library-icon {
