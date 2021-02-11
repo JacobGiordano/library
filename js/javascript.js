@@ -414,7 +414,7 @@ const closeNewBookForm = () => {
 }
 
 const countTotalBooks = () => {
-  totalBooksCount.textContent = `${myLibrary.length} ${myLibrary.length > 1 ? "books" : "book"}`;
+  totalBooksCount.textContent = `${myLibrary.length} ${myLibrary.length === 1 ? "book" : "books"}`;
 }
 
 const displaySearchResults = results => {
