@@ -128,6 +128,7 @@ const evalDeleteCardClick = e => {
 
       // listLibraryBooks(myLibrary);
       saveLibraryData();
+      countTotalBooks();
     }
   }
 }
