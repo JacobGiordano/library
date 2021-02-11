@@ -66,13 +66,53 @@ header {
   }
 }
 
-.header__inner-wrapper .left-wrapper {
+.header__inner-wrapper .left-wrapper, .header__inner-wrapper .right-wrapper {
   display: inline-block;
 }
+
+.header__inner-wrapper .right-wrapper {
+  margin-left: auto;
+  padding-top: .2rem;
+}
+
+.search-form {
+  display: inline-block;
+  position: relative;
+  background: var(--white);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  width: 100%;
+  max-width: 250px;
+}
+
+.search-input {
+  display: inline-block;
+  width: 85%;
+  border: none;
+  padding: .25rem 1.5rem .25rem .5rem;
+}
+
+.search-clear-btn {
+  position: absolute;
+  background: var(--white);
+  border: none;
+  font-size: 1.25rem;
+  line-height: .8;
+  padding: .25rem .35rem;
+  cursor: pointer;
+  right: -2rem;
+  transition: all ease-in-out .25s;
+}
+
+.search-input:focus ~.search-clear-btn, .search-input:active ~.search-clear-btn, .search-clear-btn:focus, .search-clear-btn:focus {
+  right: 0;
+}
+
 
 .library-icon {
   display: inline-block;
   vertical-align: middle;
+  font-size: 2rem;
 }
 
 .page-title {
@@ -81,13 +121,6 @@ header {
   font-weight: 500;
   vertical-align: middle;
 }
-
-@media screen and (min-width: 680px) {
-  .library-icon {
-    font-size: 2rem;
-  }
-}
-
 
 .btn {
   display: inline-block;

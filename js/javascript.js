@@ -71,7 +71,7 @@ const addBookToLibrary = () => {
   myLibrary.unshift(newBook);
   console.log("New book added!");
   clearNewBookForm();
-  listLibraryBooks();
+  listLibraryBooks(myLibrary);
   saveLibraryData()
 }
 
@@ -262,12 +262,12 @@ const generateRating = ratingNum => {
   return starWrapper;
 }
 
-const listLibraryBooks = () => {
+const listLibraryBooks = libraryData => {
   clearLibraryDisplay(bookList);
   const docFrag = new DocumentFragment;
-  for (book of myLibrary) {
+  for (book of libraryData) {
     // card
-    let cardEl = makeNewEl("div", "card", "", {"data-card-id": myLibrary.indexOf(book)});
+    let cardEl = makeNewEl("div", "card", "", {"data-card-id": libraryData.indexOf(book)});
     // delete btn
     const cardButtons = makeNewEl("div", "card-section card-btns__wrapper", "", "");
     const cardDeleteBtn = makeNewEl("span", "material-icons delete-btn", "delete_forever", {
@@ -365,7 +365,7 @@ const listLibraryBooks = () => {
 
 const saveLocalStorageData = () => {
   localStorage.setItem("library-data", JSON.stringify(myLibrary));
-  console.log(JSON.parse(localStorage.getItem("library-data")));
+  // console.log(JSON.parse(localStorage.getItem("library-data")));
 }
 
 const saveLibraryData = () => {
@@ -377,7 +377,7 @@ const loadStoredData = () => {
   !myLibrary.length ? myLibrary.push(sampleData) : null;
   saveLocalStorageData(myLibrary);
 
-  listLibraryBooks();
+  listLibraryBooks(myLibrary);
 }
 
 const expandNewBookForm = () => {
@@ -419,7 +419,33 @@ const addNewBookBtn = document.getElementById("save-new-book-btn");
 const clearNewBookBtn = document.getElementById("clear-new-book-btn");
 const closeNewBookBtn = document.getElementById("close-new-book-btn");
 const invisibleBtn = document.getElementById("invisible-btn");
-const storageToggle = document.getElementById("storage-toggle__wrapper");
+const searchForm = document.getElementById("search-form");
+const searchInput = document.getElementById("search-input");
+const clearSearchBtn = document.getElementById("search-clear-btn");
+
+searchForm.addEventListener("submit", e => {
+  e.preventDefault();
+});
+
+searchInput.addEventListener("input", () => {
+  const searchTerms = searchInput.value;
+  const results = myLibrary.filter(book => {
+    if (book.title.toLowerCase().includes(searchTerms.toLowerCase()) || book.author.toLowerCase().includes(searchTerms.toLowerCase()) || book.notes.toLowerCase().includes(searchTerms.toLowerCase())) {
+      return book;
+    }
+  }, []);
+  if (results.length > 0) {
+    listLibraryBooks(results)
+  }
+});
+
+clearSearchBtn.addEventListener("click", e => {
+  if (a11yClick(e) === true) {
+    searchInput.value = null;
+    let changeEvent = new Event('input');
+    searchInput.dispatchEvent(changeEvent);
+  }
+});
 
 saveBookFormToggle.addEventListener("click", e => {
   if (a11yClick(e) === true) {
@@ -432,7 +458,6 @@ saveBookFormToggle.addEventListener("keydown", e => {
     expandNewBookForm();
   }
 });
-
 
 closeNewBookBtn.addEventListener("click", e => {
   if (a11yClick(e) === true) {
