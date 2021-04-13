@@ -54,18 +54,32 @@ let sampleData = {
   notes: "To get started, add a book of your own by clicking on the \"+\" sign in the lower-right."
 }
 
-function Book (title, author, numOfPages, readBook) {
-  this.title = title,
-  this.author = author,
-  this.numOfPages = numOfPages,
-  this.readBook = readBook,
-  this.info = function() {
+// function Book (title, author, numOfPages, readBook) {
+//   this.title = title,
+//   this.author = author,
+//   this.numOfPages = numOfPages,
+//   this.readBook = readBook,
+//   this.info = function() {
+//     return `${title} by ${author}, ${numOfPages} pages, status: ${readBook}`
+//   }
+// }
+
+class Book {
+  constructor (title, author, numOfPages, readBook) {
+    this.title = title,
+    this.author = author,
+    this.numOfPages = numOfPages,
+    this.readBook = readBook
+  }
+
+  info = function() {
     return `${title} by ${author}, ${numOfPages} pages, status: ${readBook}`
   }
-}
+};
 
 const addBookToLibrary = () => {
-  let newBook = Object.create(Book);
+  // let newBook = Object.create(Book);
+  let newBook = new Book;
   
   newBook.title = document.getElementById("new-book-title").value;
   newBook.author = document.getElementById("new-book-author").value;
@@ -79,7 +93,7 @@ const addBookToLibrary = () => {
   console.log("New book added!");
   clearNewBookForm();
   listLibraryBooks(myLibrary);
-  saveLibraryData()
+  saveLibraryData();
 }
 
 const clearNewBookForm = () => {
