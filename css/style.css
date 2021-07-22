@@ -428,7 +428,7 @@ main {
   color: var(--golden);
 }
 
-.card .rating-star:hover, .card .rating-star:focus {
+.card .rating-star:hover {
   transform: scale(1.3);
 }
 

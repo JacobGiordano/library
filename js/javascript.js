@@ -1,49 +1,3 @@
-// let myLibrary = [
-//   {
-//     title: "The Adventures of Sherlock Holmes",
-//     author: "Sir Arthur Conan Doyle",
-//     numOfPages: 320,
-//     readBook: "No",
-//     image: "https://almabooks.com/wp-content/uploads/2016/10/adventures-of-Sherlock-Holmes.jpg"
-//   },
-//   {
-//     title: "The Hobbit (75th Anniversary Edition)",
-//     author: "J.R.R. Tolkien",
-//     numOfPages: 320,
-//     readBook: "Yes",
-//     image: "https://images-na.ssl-images-amazon.com/images/I/91b0C2YNSrL.jpg",
-//     rating: 5,
-//     notes: "As a kid who desperately wished they were an avid reader, but always found themselves bored or disinterested with the books they started, \"The Hobbit\" was a stand-out exception. I remember starting this book for a book report and feeling different about it. I found instead of feeling the way I normally did while reading, I was voraciously consuming each page. To this day \"The Hobbit\" remains one of few books from my childhood I remember fondly and still have a great appreciation for; reserving a special place for it on a small book shelf in my heart."
-//   },
-//   {
-//     title: "Moby Dick",
-//     author: "Herman Melville",
-//     numOfPages: 752,
-//     readBook: "Yes",
-//     image: "https://images-na.ssl-images-amazon.com/images/I/41VnFKC9srL.jpg",
-//     notes: "I have to admit that as much as I've wanted to really get into this book, knowing it's a classic, I can't commit to finishing it. No matter how many times I restart this book, I just lose steam and never seem to get very far. Sorry, Herman. ¯\_(ツ)_/¯"
-//   },
-//   {
-//     title: "Book 2",
-//     author: "You",
-//     numOfPages: 4,
-//     readBook: "No",
-//     rating: 5
-//   },
-//   {
-//     title: "Book 3",
-//     author: "Them",
-//     numOfPages: 24,
-//     readBook: "No"
-//   },
-//   {
-//     title: "Book 4",
-//     author: "Us",
-//     numOfPages: 10,
-//     readBook: "Yes"
-//   }
-// ];
-
 let myLibrary = [];
 
 let sampleData = {
@@ -126,7 +80,6 @@ const evalDeleteCardClick = e => {
       myLibrary.splice(clickedBtnCardId, 1);
       clickedBtnCard.parentNode.removeChild(clickedBtnCard);
 
-      // listLibraryBooks(myLibrary);
       saveLibraryData();
       countTotalBooks();
     }
@@ -196,7 +149,6 @@ const evalRatingStarClick = e => {
     }
 
     myLibrary[clickedStarCardId].rating = rating;
-    // listLibraryBooks(myLibrary);
     saveLibraryData();
   }
 }
@@ -214,7 +166,6 @@ const evalClearRatingClick = e => {
     }
 
     delete myLibrary[clickedStarCardId].rating;
-    // listLibraryBooks(myLibrary);
     saveLibraryData();
   }
 }
@@ -283,7 +234,7 @@ const listLibraryBooks = libraryData => {
       "title": "Delete book"
     });
     cardButtons.appendChild(cardDeleteBtn);
-    // add edit &delete buttons *BEFORE* both left & right wrappers
+    // add edit & delete buttons *BEFORE* both left & right wrappers
     cardEl.appendChild(cardButtons);
     let leftWrapper = makeNewEl("div", "card__inner-wrapper__left", "", "");
     // title
@@ -374,7 +325,6 @@ const listLibraryBooks = libraryData => {
 
 const saveLocalStorageData = () => {
   localStorage.setItem("library-data", JSON.stringify(myLibrary));
-  // console.log(JSON.parse(localStorage.getItem("library-data")));
 }
 
 const saveLibraryData = () => {
